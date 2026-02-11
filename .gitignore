@@ -131,3 +131,4 @@ nu_markdown/test/*.pdf
 # ==============================
 wheels_pgvector/
 *.whl
+misc
