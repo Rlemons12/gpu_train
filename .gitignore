@@ -98,3 +98,36 @@ Thumbs.db
 
 prod_out/**
 
+# ==============================
+# Model snapshots
+# ==============================
+nu_markdown/models/
+models/
+
+# ==============================
+# Reporting artifacts
+# ==============================
+app/reporting/reports/
+
+# ==============================
+# Extractor runtime artifacts
+# ==============================
+dataset_gen/**/claude_output/
+dataset_gen/**/input_strct_run/
+
+# ==============================
+# DB tool output
+# ==============================
+dataset_gen/**/tools/db_tools/output/
+
+# ==============================
+# Test artifacts
+# ==============================
+nu_markdown/test/out_put/
+nu_markdown/test/*.pdf
+
+# ==============================
+# Offline wheels
+# ==============================
+wheels_pgvector/
+*.whl
