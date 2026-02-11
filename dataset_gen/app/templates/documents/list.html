@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block title %}Documents{% endblock %}
+
+{% block content %}
+<h2>Registered Documents</h2>
+
+<form method="get">
+  <label>Title contains</label>
+  <input name="title" value="{{ filters.title }}">
+
+  <label>Domain</label>
+  <select name="domain_id">
+    <option value="">Any</option>
+    {% for d in domains %}
+      <option value="{{ d.id }}" {% if filters.domain_id == d.id|string %}selected{% endif %}>
+        {{ d.code }}
+      </option>
+    {% endfor %}
+  </select>
+
+  <label>Audience</label>
+  <select name="audience_id">
+    <option value="">Any</option>
+    {% for a in audiences %}
+      <option value="{{ a.id }}" {% if filters.audience_id == a.id|string %}selected{% endif %}>
+        {{ a.code }}
+      </option>
+    {% endfor %}
+  </select>
+
+  <label>Criticality</label>
+  <select name="criticality_id">
+    <option value="">Any</option>
+    {% for c in criticalities %}
+      <option value="{{ c.id }}" {% if filters.criticality_id == c.id|string %}selected{% endif %}>
+        {{ c.code }}
+      </option>
+    {% endfor %}
+  </select>
+
+  <button type="submit">Filter</button>
+</form>
+
+<hr>
+
+<table width="100%" border="1" cellpadding="6">
+  <tr>
+    <th>Title</th>
+    <th>Domain</th>
+    <th>Audience</th>
+    <th>Criticality</th>
+    <th>Created</th>
+  </tr>
+
+  {% for doc in documents %}
+  <tr>
+    <td>{{ doc.title }}</td>
+    <td>{{ doc.domain.code }}</td>
+    <td>{{ doc.audience.code }}</td>
+    <td>{{ doc.criticality.code }}</td>
+    <td>{{ doc.created_at.strftime("%Y-%m-%d") }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

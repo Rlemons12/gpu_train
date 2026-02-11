@@ -1,0 +1,184 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Batch Folder Ingest + Full Pipeline</h2>
+
+<form method="post" class="batch-form">
+
+  <!-- ================================================= -->
+  <!-- FOLDER INPUT                                      -->
+  <!-- ================================================= -->
+  <div class="form-row">
+    <label for="folder_path">Folder Path (absolute)</label>
+    <input
+      type="text"
+      id="folder_path"
+      name="folder_path"
+      required
+      placeholder="/mnt/c/Users/operator/emtac/data/raw_docs"
+      style="width:600px;"
+    >
+  </div>
+
+  <hr>
+
+  <!-- ================================================= -->
+  <!-- METADATA                                          -->
+  <!-- ================================================= -->
+  <div class="form-grid">
+
+    <div>
+      <label>Domain</label>
+      <select name="domain_id" required>
+        {% for d in domains %}
+          <option value="{{ d.id }}">{{ d.code }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div>
+      <label>Audience</label>
+      <select name="audience_id" required>
+        {% for a in audiences %}
+          <option value="{{ a.id }}">{{ a.code }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div>
+      <label>Criticality</label>
+      <select name="criticality_id" required>
+        {% for c in criticalities %}
+          <option value="{{ c.id }}">{{ c.code }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+  </div>
+
+  <hr>
+
+  <!-- ================================================= -->
+  <!-- TAGS                                              -->
+  <!-- ================================================= -->
+  <h4>Tags</h4>
+  <div class="checkbox-grid">
+    {% for tag in tags %}
+      <label class="checkbox-item">
+        <input type="checkbox" name="tag_ids" value="{{ tag.id }}">
+        <span>{{ tag.code }}</span>
+      </label>
+    {% endfor %}
+  </div>
+
+  <hr>
+
+  <!-- ================================================= -->
+  <!-- PIPELINE CONFIG                                   -->
+  <!-- ================================================= -->
+  <h3>Pipeline Configuration</h3>
+
+  <div class="form-grid">
+
+    <div>
+      <label>Answer Model</label>
+      <select name="model" required>
+        {% for m in models %}
+          <option value="{{ m.name }}">{{ m.name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div>
+      <label>Preset</label>
+      <select name="preset">
+        <option value="balanced" selected>Balanced (Recommended)</option>
+        <option value="quick_test">Quick Test</option>
+        <option value="high_quality">High Quality</option>
+      </select>
+    </div>
+
+  </div>
+
+  <div class="toggle-row">
+    <label>
+      <input type="checkbox" name="embed" checked>
+      Enable Embeddings
+    </label>
+
+    <label>
+      <input type="checkbox" name="test_mode">
+      Test Mode
+    </label>
+  </div>
+
+  <br>
+
+  <button type="submit" class="primary-btn">
+    🚀 Run Full Batch Pipeline
+  </button>
+
+</form>
+
+{% if result %}
+  <hr>
+  <div class="result-box">
+    <strong>{{ result }}</strong>
+  </div>
+{% endif %}
+
+<!-- ================================================= -->
+<!-- LIGHT STYLING                                     -->
+<!-- ================================================= -->
+<style>
+.form-row {
+  margin-bottom: 20px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.checkbox-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 8px;
+}
+
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.toggle-row {
+  display: flex;
+  gap: 30px;
+  margin-top: 10px;
+}
+
+.primary-btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #1f6feb;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.primary-btn:hover {
+  background-color: #155bc1;
+}
+
+.result-box {
+  padding: 12px;
+  background: #f0f8ff;
+  border-left: 4px solid #1f6feb;
+}
+</style>
+
+{% endblock %}

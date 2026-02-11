@@ -1,0 +1,33 @@
+{
+  "model_id": "mistral7b_mini",
+  "trainer": "sft_fsdp",
+
+  "job_name": "mistral7b_mini_lora",
+
+  "base_model_path": "/mnt/c/Users/operator/E_vdrive/models/llm/mistral-7b-instruct",
+
+  "train_data_path": "/mnt/c/Users/operator/PycharmProjects/gpu_train/data/train.jsonl",
+
+  "output_dir": "/mnt/c/Users/operator/PycharmProjects/gpu_train/prod_out/mistral7b_mini",
+
+  "num_train_epochs": 1,
+  "per_device_train_batch_size": 1,
+  "gradient_accumulation_steps": 1,
+
+  "learning_rate": 2e-6,
+  "max_seq_length": 1024,
+  "mixed_precision": "bf16",
+
+  "enable_lora": true,
+  "merge_lora_into_hf": true,
+  "lora_r": 8,
+  "lora_alpha": 16,
+  "lora_dropout": 0.05,
+
+  "training_policy": {
+    "register_model": true,
+    "registry_name": "mistral7b_mini",
+    "register_flavor": "transformers",
+    "register_after_lora_merge": true
+  }
+}

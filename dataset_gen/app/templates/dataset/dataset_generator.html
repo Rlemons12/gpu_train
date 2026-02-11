@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+
+{% block title %}Dataset Generator{% endblock %}
+
+{% block content %}
+<h1>Dataset Generator</h1>
+
+<form method="POST" action="{{ url_for('dataset_generator.run') }}">
+
+  <!-- ===================================================== -->
+  <!-- DOCUMENT SELECTION -->
+  <!-- ===================================================== -->
+  <fieldset>
+    <legend>Document Selection</legend>
+
+    <!-- Domain -->
+    <div>
+      <label>Domain</label><br>
+      <select name="domain">
+        <option value="">-- Any --</option>
+        {% for d in domains %}
+          <option value="{{ d.code }}">{{ d.code }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <!-- Audience -->
+    <div>
+      <label>Audience</label><br>
+      <select name="audience">
+        <option value="">-- Any --</option>
+        {% for a in audiences %}
+          <option value="{{ a.code }}">{{ a.code }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <!-- Max Criticality -->
+    <div>
+      <label>Max Criticality</label><br>
+      <select name="max_criticality">
+        <option value="">-- Any --</option>
+        {% for c in criticalities %}
+          <option value="{{ c.code }}">
+            {{ c.code }} (severity {{ c.severity }})
+          </option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <!-- Include Tags -->
+    <div>
+      <label>Include Tags</label><br>
+      <select name="include_tags" multiple size="6">
+        {% for t in tags %}
+          <option value="{{ t.code }}">{{ t.code }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <!-- Exclude Tags -->
+    <div>
+      <label>Exclude Tags</label><br>
+      <select name="exclude_tags" multiple size="6">
+        {% for t in tags %}
+          <option value="{{ t.code }}">{{ t.code }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <!-- Document IDs (advanced / optional) -->
+    <div>
+      <label>Document IDs (optional, space separated)</label><br>
+      <input type="text" name="document_ids" placeholder="12 18 42">
+    </div>
+  </fieldset>
+
+  <!-- ===================================================== -->
+  <!-- OUTPUT OPTIONS -->
+  <!-- ===================================================== -->
+  <fieldset>
+    <legend>Output Options</legend>
+
+    <div>
+      <label>Format</label><br>
+      <select name="format">
+        <option value="all">All</option>
+        <option value="jsonl">JSONL</option>
+        <option value="alpaca">Alpaca</option>
+        <option value="chatml">ChatML</option>
+        <option value="prompt_response">Prompt / Response (Trainer-ready)</option>
+      </select>
+    </div>
+
+    <div>
+      <label>Output Directory</label><br>
+      <input type="text" name="out" value="dataset_output">
+    </div>
+
+    <div>
+      <label>
+        <input type="checkbox" name="non_strict" checked>
+        Non-strict mode (skip invalid documents)
+      </label>
+    </div>
+  </fieldset>
+
+  <br>
+  <button type="submit">Generate Dataset</button>
+
+</form>
+
+{% if result %}
+<hr>
+<h3>Result</h3>
+<p>{{ result }}</p>
+{% endif %}
+
+{% endblock %}

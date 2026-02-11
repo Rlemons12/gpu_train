@@ -1,0 +1,672 @@
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Training Report – 0f6d2ada7a914580b7705fc82adec6d8</title>
+
+        <style>
+            @page {
+                size: A4;
+                margin: 20mm;
+            }
+
+            html, body {
+                margin: 0 !important;
+                padding: 0 !important;
+                width: 100%;
+            }
+
+            body {
+                font-family: Arial, sans-serif;
+                font-size: 13px;
+            }
+
+            h1, h2 {
+                color: #333;
+                text-align: left;
+                margin: 24px 0 12px 0;
+            }
+
+            h1 {
+                margin-top: 0;
+                font-size: 24px;
+            }
+
+            h2 {
+                font-size: 18px;
+            }
+
+            .meta {
+                margin-bottom: 24px;
+                font-size: 12px;
+            }
+
+            img {
+                width: 100%;
+                max-width: 800px;
+                margin: 12px 0 8px 0;
+                display: block;
+            }
+
+            .plot-description {
+                font-size: 11px;
+                color: #555;
+                line-height: 1.5;
+                margin-bottom: 24px;
+                max-width: 800px;
+            }
+
+            table {
+                border-collapse: collapse;
+                width: 100%;
+                margin-bottom: 24px;
+                table-layout: fixed;
+                font-size: 12px;
+            }
+
+            th, td {
+                padding: 6px 8px;
+                border: 1px solid #ccc;
+                text-align: left;
+                vertical-align: top;
+                word-wrap: break-word;
+            }
+
+            th {
+                background-color: #f3f3f3;
+                font-weight: bold;
+            }
+
+            /* Parameters table specific widths */
+            .params-table col:nth-child(1) {
+                width: 30%;
+            }
+            .params-table col:nth-child(2) {
+                width: 25%;
+            }
+            .params-table col:nth-child(3) {
+                width: 45%;
+            }
+
+            /* Metrics table specific widths */
+            .metrics-table col:nth-child(1) {
+                width: 25%;
+            }
+            .metrics-table col:nth-child(2) {
+                width: 20%;
+            }
+            .metrics-table col:nth-child(3) {
+                width: 55%;
+            }
+
+            .param-desc, .metric-desc {
+                font-size: 11px;
+                color: #555;
+                line-height: 1.3;
+            }
+        </style>
+    </head>
+
+    <body>
+
+    <h1>Training Report</h1>
+
+    <div class="meta">
+        <b>Run ID:</b> 0f6d2ada7a914580b7705fc82adec6d8<br>
+        <b>Status:</b> FINISHED<br>
+        <b>Start:</b> 2026-02-05 04:52:26.266000<br>
+        <b>End:</b> 2026-02-05 05:18:02.484000<br>
+        <b>Duration (sec):</b> 1536.218
+    </div>
+
+    <h2>Parameters</h2>
+    <table class="params-table">
+        <colgroup>
+            <col style="width: 30%;">
+            <col style="width: 25%;">
+            <col style="width: 45%;">
+        </colgroup>
+        <tr>
+            <th>Parameter</th>
+            <th>Value</th>
+            <th>Description</th>
+        </tr>
+        
+        <tr>
+            <td>base_model_path</td>
+            <td>/mnt/c/Users/operator/emtac/models/llm/mistral-7b-instruct</td>
+            <td class="param-desc">
+                
+                    &nbsp;
+                
+            </td>
+        </tr>
+        
+        <tr>
+            <td>dataset_hash</td>
+            <td>c0b17d026fd5ff6d63d4b754a464862dca5ba0927cf9e0e9f382f1d582f5891f</td>
+            <td class="param-desc">
+                
+                    &nbsp;
+                
+            </td>
+        </tr>
+        
+        <tr>
+            <td>dataset_path</td>
+            <td>/mnt/c/Users/operator/PycharmProjects/gpu_train/dataset_output/qna_training__complete/v001/qna_training__complete.jsonl</td>
+            <td class="param-desc">
+                
+                    &nbsp;
+                
+            </td>
+        </tr>
+        
+        <tr>
+            <td>dataset_size</td>
+            <td>527</td>
+            <td class="param-desc">
+                
+                    &nbsp;
+                
+            </td>
+        </tr>
+        
+        <tr>
+            <td>dataset_version</td>
+            <td>v001</td>
+            <td class="param-desc">
+                
+                    &nbsp;
+                
+            </td>
+        </tr>
+        
+        <tr>
+            <td>device_type</td>
+            <td>cuda</td>
+            <td class="param-desc">
+                
+                    &nbsp;
+                
+            </td>
+        </tr>
+        
+        <tr>
+            <td>effective_batch_size</td>
+            <td>4</td>
+            <td class="param-desc">
+                
+                    &nbsp;
+                
+            </td>
+        </tr>
+        
+        <tr>
+            <td>enable_lora</td>
+            <td>True</td>
+            <td class="param-desc">
+                
+                    Whether LoRA (Low-Rank Adaptation) fine-tuning is enabled
+                
+            </td>
+        </tr>
+        
+        <tr>
+            <td>enable_mlflow</td>
+            <td>False</td>
+            <td class="param-desc">
+                
+                    &nbsp;
+                
+            </td>
+        </tr>
+        
+        <tr>
+            <td>epochs</td>
+            <td>1</td>
+            <td class="param-desc">
+                
+                    Total number of training epochs
+                
+            </td>
+        </tr>
+        
+        <tr>
+            <td>extra_args</td>
+            <td>[]</td>
+            <td class="param-desc">
+                
+                    &nbsp;
+                
+            </td>
+        </tr>
+        
+        <tr>
+            <td>extra_env</td>
+            <td>{}</td>
+            <td class="param-desc">
+                
+                    &nbsp;
+                
+            </td>
+        </tr>
+        
+        <tr>
+            <td>fsdp_auto_wrap_policy</td>
+            <td>transformer</td>
+            <td class="param-desc">
+                
+                    &nbsp;
+                
+            </td>
+        </tr>
+        
+        <tr>
+            <td>fsdp_min_num_params</td>
+            <td>100000000</td>
+            <td class="param-desc">
+                
+                    &nbsp;
+                
+            </td>
+        </tr>
+        
+        <tr>
+            <td>fsdp_sharding_strategy</td>
+            <td>FULL_SHARD</td>
+            <td class="param-desc">
+                
+                    How model parameters are split across GPUs (FULL_SHARD = maximum memory savings)
+                
+            </td>
+        </tr>
+        
+        <tr>
+            <td>gpu_name</td>
+            <td>NVIDIA GeForce RTX 5090</td>
+            <td class="param-desc">
+                
+                    &nbsp;
+                
+            </td>
+        </tr>
+        
+        <tr>
+            <td>gradient_accumulation_steps</td>
+            <td>4</td>
+            <td class="param-desc">
+                
+                    Number of steps to accumulate gradients before updating (simulates larger batch)
+                
+            </td>
+        </tr>
+        
+        <tr>
+            <td>job_name</td>
+            <td>mistral7b_mini_lora</td>
+            <td class="param-desc">
+                
+                    &nbsp;
+                
+            </td>
+        </tr>
+        
+        <tr>
+            <td>learning_rate</td>
+            <td>2e-06</td>
+            <td class="param-desc">
+                
+                    Step size for weight updates during training (lower = more cautious learning)
+                
+            </td>
+        </tr>
+        
+        <tr>
+            <td>max_seq_length</td>
+            <td>1024</td>
+            <td class="param-desc">
+                
+                    Maximum input sequence length in tokens (longer = more context but more memory)
+                
+            </td>
+        </tr>
+        
+        <tr>
+            <td>mixed_precision</td>
+            <td>bf16</td>
+            <td class="param-desc">
+                
+                    Precision format for calculations (bf16 = faster training with lower memory usage)
+                
+            </td>
+        </tr>
+        
+        <tr>
+            <td>nnodes</td>
+            <td>1</td>
+            <td class="param-desc">
+                
+                    Number of machines/nodes used for distributed training
+                
+            </td>
+        </tr>
+        
+        <tr>
+            <td>node_rank</td>
+            <td>0</td>
+            <td class="param-desc">
+                
+                    Identifier for this node in multi-node training (0 = primary node)
+                
+            </td>
+        </tr>
+        
+        <tr>
+            <td>num_train_epochs</td>
+            <td>1.0</td>
+            <td class="param-desc">
+                
+                    Number of complete passes through the training dataset
+                
+            </td>
+        </tr>
+        
+        <tr>
+            <td>output_dir</td>
+            <td>/mnt/c/Users/operator/PycharmProjects/gpu_train/prod_out/mistral7b_mini</td>
+            <td class="param-desc">
+                
+                    &nbsp;
+                
+            </td>
+        </tr>
+        
+        <tr>
+            <td>per_device_eval_batch_size</td>
+            <td>1</td>
+            <td class="param-desc">
+                
+                    &nbsp;
+                
+            </td>
+        </tr>
+        
+        <tr>
+            <td>per_device_train_batch_size</td>
+            <td>1</td>
+            <td class="param-desc">
+                
+                    Number of training samples processed together per device
+                
+            </td>
+        </tr>
+        
+        <tr>
+            <td>rdzv_backend</td>
+            <td>c10d</td>
+            <td class="param-desc">
+                
+                    &nbsp;
+                
+            </td>
+        </tr>
+        
+        <tr>
+            <td>resume_strict</td>
+            <td>True</td>
+            <td class="param-desc">
+                
+                    &nbsp;
+                
+            </td>
+        </tr>
+        
+        <tr>
+            <td>seed</td>
+            <td>42</td>
+            <td class="param-desc">
+                
+                    Random seed for reproducible training runs
+                
+            </td>
+        </tr>
+        
+        <tr>
+            <td>trainer</td>
+            <td>sft_fsdp</td>
+            <td class="param-desc">
+                
+                    &nbsp;
+                
+            </td>
+        </tr>
+        
+        <tr>
+            <td>training_policy</td>
+            <td>{&#39;register_model&#39;: True, &#39;registry_name&#39;: &#39;emtac_mistral_sft&#39;, &#39;dataset_hash&#39;: &#39;c0b17d026fd5ff6d63d4b754a464862dca5ba0927cf9e0e9f382f1d582f5891f&#39;, &#39;dataset_name&#39;: &#39;qna_training__complete&#39;, &#39;dataset_version&#39;: &#39;v001&#39;}</td>
+            <td class="param-desc">
+                
+                    &nbsp;
+                
+            </td>
+        </tr>
+        
+        <tr>
+            <td>train_data_path</td>
+            <td>/mnt/c/Users/operator/PycharmProjects/gpu_train/dataset_output/qna_training__complete/v001/qna_training__complete.jsonl</td>
+            <td class="param-desc">
+                
+                    &nbsp;
+                
+            </td>
+        </tr>
+        
+        <tr>
+            <td>warmup_ratio</td>
+            <td>0.03</td>
+            <td class="param-desc">
+                
+                    Fraction of training for learning rate warmup (stabilizes early training)
+                
+            </td>
+        </tr>
+        
+        <tr>
+            <td>weight_decay</td>
+            <td>0.0</td>
+            <td class="param-desc">
+                
+                    Regularization to prevent overfitting (penalizes large weights)
+                
+            </td>
+        </tr>
+        
+        <tr>
+            <td>world_size</td>
+            <td>1</td>
+            <td class="param-desc">
+                
+                    &nbsp;
+                
+            </td>
+        </tr>
+        
+    </table>
+
+    <h2>Metrics</h2>
+    <table class="metrics-table">
+        <colgroup>
+            <col style="width: 25%;">
+            <col style="width: 20%;">
+            <col style="width: 55%;">
+        </colgroup>
+        <tr>
+            <th>Metric</th>
+            <th>Value</th>
+            <th>Description</th>
+        </tr>
+
+        
+        <tr>
+            <td>gpu_memory_total_mb</td>
+            <td>32607.0</td>
+            <td class="metric-desc">
+                
+                    GPU utilization / memory telemetry collected during training
+                
+            </td>
+        </tr>
+        
+        <tr>
+            <td>gpu_memory_used_mb</td>
+            <td>32206.2421875</td>
+            <td class="metric-desc">
+                
+                    GPU utilization / memory telemetry collected during training
+                
+            </td>
+        </tr>
+        
+        <tr>
+            <td>gpu_memory_utilization_pct</td>
+            <td>98.77094546416414</td>
+            <td class="metric-desc">
+                
+                    GPU utilization / memory telemetry collected during training
+                
+            </td>
+        </tr>
+        
+        <tr>
+            <td>gpu_peak_memory_allocated_mb</td>
+            <td>55406.88818359375</td>
+            <td class="metric-desc">
+                
+                    GPU utilization / memory telemetry collected during training
+                
+            </td>
+        </tr>
+        
+        <tr>
+            <td>gpu_power_watts</td>
+            <td>149.038</td>
+            <td class="metric-desc">
+                
+                    GPU utilization / memory telemetry collected during training
+                
+            </td>
+        </tr>
+        
+        <tr>
+            <td>gpu_temperature_c</td>
+            <td>42.0</td>
+            <td class="metric-desc">
+                
+                    GPU utilization / memory telemetry collected during training
+                
+            </td>
+        </tr>
+        
+        <tr>
+            <td>gpu_torch_max_memory_allocated_mb</td>
+            <td>55406.88818359375</td>
+            <td class="metric-desc">
+                
+                    GPU utilization / memory telemetry collected during training
+                
+            </td>
+        </tr>
+        
+        <tr>
+            <td>gpu_torch_memory_allocated_mb</td>
+            <td>27718.2529296875</td>
+            <td class="metric-desc">
+                
+                    GPU utilization / memory telemetry collected during training
+                
+            </td>
+        </tr>
+        
+        <tr>
+            <td>gpu_torch_memory_reserved_mb</td>
+            <td>56412.0</td>
+            <td class="metric-desc">
+                
+                    GPU utilization / memory telemetry collected during training
+                
+            </td>
+        </tr>
+        
+        <tr>
+            <td>gpu_utilization_pct</td>
+            <td>55.0</td>
+            <td class="metric-desc">
+                
+                    GPU utilization / memory telemetry collected during training
+                
+            </td>
+        </tr>
+        
+        <tr>
+            <td>grad_norm</td>
+            <td>6.90625</td>
+            <td class="metric-desc">
+                
+                    Gradient norm magnitude (stability indicator)
+                
+            </td>
+        </tr>
+        
+        <tr>
+            <td>lr</td>
+            <td>2.8320530687087055e-10</td>
+            <td class="metric-desc">
+                
+                    Learning rate at final training step
+                
+            </td>
+        </tr>
+        
+        <tr>
+            <td>train_loss</td>
+            <td>2.7596964836120605</td>
+            <td class="metric-desc">
+                
+                    Final training loss value (lower is better)
+                
+            </td>
+        </tr>
+        
+    </table>
+
+    
+    <h2>Loss Curve</h2>
+    <img src="loss.png">
+    <p class="plot-description">
+        <b>How to read this chart:</b> The loss curve shows how well the model is learning over time. 
+        The y-axis shows the loss value (lower is better), and the x-axis shows training steps. 
+        A good training run shows a general downward trend, indicating the model is improving. 
+        Some fluctuation is normal, but large spikes or plateaus may indicate learning rate issues, 
+        data quality problems, or the need for more training steps.
+    </p>
+    
+
+    
+    <h2>Learning Rate</h2>
+    <img src="lr.png">
+    <p class="plot-description">
+        <b>How to read this chart:</b> The learning rate controls how much the model adjusts its weights during training. 
+        This chart shows how the learning rate changes over training steps. 
+        Most schedules start with a warmup phase (gradual increase), then decay (gradual decrease) toward the end. 
+        The warmup helps stabilize early training, while the decay allows the model to fine-tune and converge. 
+        A schedule that decays too quickly may prevent the model from learning effectively.
+    </p>
+    
+
+    
+
+    </body>
+    </html>
+    

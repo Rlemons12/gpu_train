@@ -1,0 +1,18 @@
+You are given a section of a controlled document.
+
+Use the document title only if it helps clarify the question.
+Document Title: {document_title}
+
+Create ONE clear, specific question that can be answered directly from the text.
+
+Rules:
+- The question must be concise
+- The question must NOT repeat the full text
+- The question must focus on a single requirement, rule, or responsibility
+- Do NOT include document numbers, IDs, or section numbers
+
+Text:
+{context}
+
+Question:
+

@@ -1,0 +1,383 @@
+{
+  "source_path": "/mnt/c/Users/operator/PycharmProjects/gpu_train/dataset_gen/dataset_qanda_generator/document_structure_extractor/input_strct_run/ADD-VANTAGE BAY 5 Thermocouple Chart.docx",
+  "doc_type": "docx",
+  "total_pages": 1,
+  "chunks": [
+    {
+      "page": 1,
+      "chunk_type": "paragraph",
+      "text": "ADD-Vantage (Bays) Steaming Channel Reference",
+      "metadata": {
+        "style": "Normal",
+        "para_index": 0
+      }
+    },
+    {
+      "page": 1,
+      "chunk_type": "paragraph",
+      "text": "Steaming Thermocouple Reference INFO ONLY",
+      "metadata": {
+        "style": "Normal",
+        "para_index": 1
+      }
+    },
+    {
+      "page": 1,
+      "chunk_type": "paragraph",
+      "text": "ADD-VANTAGE (Bay 5)",
+      "metadata": {
+        "style": "Normal",
+        "para_index": 3
+      }
+    },
+    {
+      "page": 1,
+      "chunk_type": "paragraph",
+      "text": "CHANNEL\tTE NO.\tDESCRIPTION\tDATA RECORDER BATCH",
+      "metadata": {
+        "style": "Normal",
+        "para_index": 5
+      }
+    },
+    {
+      "page": 1,
+      "chunk_type": "paragraph",
+      "text": "201\tTE-5115\tTank 5102 Vac.\t1) Bay 5 Washer and",
+      "metadata": {
+        "style": "Normal",
+        "para_index": 7
+      }
+    },
+    {
+      "page": 1,
+      "chunk_type": "paragraph",
+      "text": "Receiver (CV-51115)\tWasher Support",
+      "metadata": {
+        "style": "Normal",
+        "para_index": 8
+      }
+    },
+    {
+      "page": 1,
+      "chunk_type": "paragraph",
+      "text": "306\tTE-50303\tA Washer (50300)\t1) Bay 5 Washer and",
+      "metadata": {
+        "style": "Normal",
+        "para_index": 10
+      }
+    },
+    {
+      "page": 1,
+      "chunk_type": "paragraph",
+      "text": "307\tTE-5201\tTank 5201 Drain\t1) Bay 5 Washer and",
+      "metadata": {
+        "style": "Normal",
+        "para_index": 13
+      }
+    },
+    {
+      "page": 1,
+      "chunk_type": "paragraph",
+      "text": "(A support system)\tWasher Support",
+      "metadata": {
+        "style": "Normal",
+        "para_index": 14
+      }
+    },
+    {
+      "page": 1,
+      "chunk_type": "paragraph",
+      "text": "308\tTE-5202\tSupply Casing Drain\t1) Bay 5 Washer and",
+      "metadata": {
+        "style": "Normal",
+        "para_index": 16
+      }
+    },
+    {
+      "page": 1,
+      "chunk_type": "paragraph",
+      "text": "Pump 5201\tWasher Support",
+      "metadata": {
+        "style": "Normal",
+        "para_index": 17
+      }
+    },
+    {
+      "page": 1,
+      "chunk_type": "paragraph",
+      "text": "401\tTE-5203\tAir Inlet Valve\t1) Bay 5 Washer and",
+      "metadata": {
+        "style": "Normal",
+        "para_index": 19
+      }
+    },
+    {
+      "page": 1,
+      "chunk_type": "paragraph",
+      "text": "(A support system)\tWasher Support",
+      "metadata": {
+        "style": "Normal",
+        "para_index": 20
+      }
+    },
+    {
+      "page": 1,
+      "chunk_type": "paragraph",
+      "text": "402\tTE-\tSupply Header\t1) Bay 5 Washer and",
+      "metadata": {
+        "style": "Normal",
+        "para_index": 22
+      }
+    },
+    {
+      "page": 1,
+      "chunk_type": "paragraph",
+      "text": "5204B-01\t(A support system)\tWasher Support",
+      "metadata": {
+        "style": "Normal",
+        "para_index": 23
+      }
+    },
+    {
+      "page": 1,
+      "chunk_type": "paragraph",
+      "text": "403\tTE-5205\tTank 5202, Vac.\t1) Bay 5 Washer and",
+      "metadata": {
+        "style": "Normal",
+        "para_index": 25
+      }
+    },
+    {
+      "page": 1,
+      "chunk_type": "paragraph",
+      "text": "Receiver Drain\tWasher Support",
+      "metadata": {
+        "style": "Normal",
+        "para_index": 26
+      }
+    },
+    {
+      "page": 1,
+      "chunk_type": "paragraph",
+      "text": "404\tTE-5206\tPump 5202, Vac.\t1) Bay 5 Washer and",
+      "metadata": {
+        "style": "Normal",
+        "para_index": 28
+      }
+    },
+    {
+      "page": 1,
+      "chunk_type": "paragraph",
+      "text": "Receiver Casing Drain \tWasher Support",
+      "metadata": {
+        "style": "Normal",
+        "para_index": 29
+      }
+    },
+    {
+      "page": 1,
+      "chunk_type": "paragraph",
+      "text": "105\tTE-5103\tAir Inlet Valve\t1) Bay 5 Washer and",
+      "metadata": {
+        "style": "Normal",
+        "para_index": 31
+      }
+    },
+    {
+      "page": 1,
+      "chunk_type": "paragraph",
+      "text": "(B support system)\tWasher Support",
+      "metadata": {
+        "style": "Normal",
+        "para_index": 32
+      }
+    },
+    {
+      "page": 1,
+      "chunk_type": "paragraph",
+      "text": "106\tTE-5104B\tSupply Header\t1) Bay 5 Washer and",
+      "metadata": {
+        "style": "Normal",
+        "para_index": 34
+      }
+    },
+    {
+      "page": 1,
+      "chunk_type": "paragraph",
+      "text": "(B support system)\tWasher Support",
+      "metadata": {
+        "style": "Normal",
+        "para_index": 35
+      }
+    },
+    {
+      "page": 1,
+      "chunk_type": "paragraph",
+      "text": "101 *\tTE-9119\tRinse Dryer Line A\t2) Bay 5 Rinser/",
+      "metadata": {
+        "style": "Normal",
+        "para_index": 37
+      }
+    },
+    {
+      "page": 1,
+      "chunk_type": "paragraph",
+      "text": "ARD4500\tDryer Steaming",
+      "metadata": {
+        "style": "Normal",
+        "para_index": 38
+      }
+    },
+    {
+      "page": 1,
+      "chunk_type": "paragraph",
+      "text": "102 *\tTE-9118\tRinse Dryer Line B\t2) Bay 5 Rinser/",
+      "metadata": {
+        "style": "Normal",
+        "para_index": 40
+      }
+    },
+    {
+      "page": 1,
+      "chunk_type": "paragraph",
+      "text": "ARD4500\tDryer Steaming",
+      "metadata": {
+        "style": "Normal",
+        "para_index": 41
+      }
+    },
+    {
+      "page": 1,
+      "chunk_type": "paragraph",
+      "text": "CHANNEL\tTE NO.\tDESCRIPTION\tDATA RECORDER BATCH",
+      "metadata": {
+        "style": "Normal",
+        "para_index": 43
+      }
+    },
+    {
+      "page": 1,
+      "chunk_type": "paragraph",
+      "text": "107\tTE-5108\tTank Drain Valve\t1) Bay 5 Washer and",
+      "metadata": {
+        "style": "Normal",
+        "para_index": 45
+      }
+    },
+    {
+      "page": 1,
+      "chunk_type": "paragraph",
+      "text": "(B support system)\tWasher Support",
+      "metadata": {
+        "style": "Normal",
+        "para_index": 46
+      }
+    },
+    {
+      "page": 1,
+      "chunk_type": "paragraph",
+      "text": "108\tTE-5105\tSupply Pump\t1) Bay 5 Washer and",
+      "metadata": {
+        "style": "Normal",
+        "para_index": 48
+      }
+    },
+    {
+      "page": 1,
+      "chunk_type": "paragraph",
+      "text": "(B support system)\tWasher Support",
+      "metadata": {
+        "style": "Normal",
+        "para_index": 49
+      }
+    },
+    {
+      "page": 1,
+      "chunk_type": "paragraph",
+      "text": "301\tTE-5116\tPump-5102 Vac.\t1) Bay 5 Washer and",
+      "metadata": {
+        "style": "Normal",
+        "para_index": 51
+      }
+    },
+    {
+      "page": 1,
+      "chunk_type": "paragraph",
+      "text": "Receiver Drain Pump\tWasher Support",
+      "metadata": {
+        "style": "Normal",
+        "para_index": 52
+      }
+    },
+    {
+      "page": 1,
+      "chunk_type": "paragraph",
+      "text": "302\tTE-5119\tVac. Receiver Inlet\t 1) Bay 5 Washer and",
+      "metadata": {
+        "style": "Normal",
+        "para_index": 54
+      }
+    },
+    {
+      "page": 1,
+      "chunk_type": "paragraph",
+      "text": "Suction (CV-5119)\tWasher Support",
+      "metadata": {
+        "style": "Normal",
+        "para_index": 55
+      }
+    },
+    {
+      "page": 1,
+      "chunk_type": "paragraph",
+      "text": "303\tTE-51255\tB washer (50400)\t1) Bay 5 Washer and",
+      "metadata": {
+        "style": "Normal",
+        "para_index": 57
+      }
+    },
+    {
+      "page": 1,
+      "chunk_type": "paragraph",
+      "text": "(AIW5100)\tWasher Support",
+      "metadata": {
+        "style": "Normal",
+        "para_index": 58
+      }
+    },
+    {
+      "page": 1,
+      "chunk_type": "paragraph",
+      "text": "All used for washer and washer support steaming.",
+      "metadata": {
+        "style": "Normal",
+        "para_index": 60
+      }
+    },
+    {
+      "page": 1,
+      "chunk_type": "paragraph",
+      "text": "* Used for rinser/dryer steaming.                                      .",
+      "metadata": {
+        "style": "Normal",
+        "para_index": 61
+      }
+    },
+    {
+      "page": 1,
+      "chunk_type": "table",
+      "text": "CHANNEL | TE NO. | DESCRIPTION | DATA RECORDER BATCH\n103 * | TE-50301 | Bump tank A drain line\n(A Filler) | 3) Bay 5 A filler and \nBump Tank Steaming\n104 * | TE-50302 | Filler drain A line\n(A Filler) | 3) Bay 5 A filler and \nBump Tank Steaming\n304 * | TE-50201 | Bumpt tank B drain line\n(B Filler) | 3) Bay 5 B filler and \nBump Tank Steaming\n305 * | TE-50202 | Filler drain B line\n(B Filler) | 3) Bay 5 B filler and \nBump Tank Steaming",
+      "metadata": {
+        "table_index": 0
+      }
+    }
+  ],
+  "images": [],
+  "metadata": {
+    "file_size": 14803,
+    "total_chunks": 41,
+    "total_paragraphs": 63,
+    "total_tables": 1
+  },
+  "extraction_timestamp": "2026-02-06T12:57:55.200162"
+}

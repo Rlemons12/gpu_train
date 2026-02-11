@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Dataset System{% endblock %}
+
+{% block content %}
+<h1>Welcome</h1>
+<p>Select an action to continue.</p>
+
+<ul>
+  <li>
+    <a href="/documents/new">Register a Document</a>
+  </li>
+
+  <li>
+    <a href="/documents">View Documents</a>
+  </li>
+
+  <li>
+    <a href="/pipeline/run">
+      Run Processing Pipeline
+    </a>
+    <br>
+    <small>
+      Ingest, chunk, generate questions/answers, rank results
+    </small>
+  </li>
+
+  <li>
+    <a href="{{ url_for('dataset_generator.index') }}">
+      Generate Dataset
+    </a>
+    <br>
+    <small>
+      Export training datasets from existing ranked Q&A
+    </small>
+  </li>
+</ul>
+
+{% endblock %}

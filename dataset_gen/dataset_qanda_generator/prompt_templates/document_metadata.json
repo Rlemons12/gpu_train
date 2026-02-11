@@ -1,0 +1,38 @@
+DOCUMENT METADATA
+-----------------
+Document Title: {document_title}
+Section: {section}
+Subsection: {subsection}
+Page: {page}
+
+SOURCE TEXT
+-----------
+{context}
+
+TASK
+----
+Generate clear, factual questions based ONLY on the SOURCE TEXT above.
+
+RULES
+-----
+- Use ONLY information explicitly stated in SOURCE TEXT
+- Do NOT add explanations or commentary
+- Do NOT repeat the source text
+- Do NOT include numbering, headings, or markdown
+- If no valid questions can be generated, return an empty JSON array
+
+OUTPUT FORMAT
+-------------
+Return ONLY valid JSON.
+Return NOTHING except JSON.
+
+The output MUST be a JSON array.
+Each item MUST be an object with EXACTLY one key named "question".
+
+EXAMPLE
+-------
+[
+  {{
+    "question": "What is described in the source text?"
+  }}
+]

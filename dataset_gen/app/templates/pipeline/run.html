@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+{% block title %}Run Dataset Pipeline{% endblock %}
+
+{% block content %}
+<h2>Run Dataset Pipeline</h2>
+
+<form method="get">
+
+  <label>Title contains</label>
+  <input name="title" value="{{ filters.title }}">
+
+  <label>Domain</label>
+  <select name="domain_id">
+    <option value="">Any</option>
+    {% for d in domains %}
+      <option value="{{ d.id }}" {% if filters.domain_id == d.id|string %}selected{% endif %}>
+        {{ d.code }}
+      </option>
+    {% endfor %}
+  </select>
+
+  <label>Audience</label>
+  <select name="audience_id">
+    <option value="">Any</option>
+    {% for a in audiences %}
+      <option value="{{ a.id }}" {% if filters.audience_id == a.id|string %}selected{% endif %}>
+        {{ a.code }}
+      </option>
+    {% endfor %}
+  </select>
+
+  <label>Criticality</label>
+  <select name="criticality_id">
+    <option value="">Any</option>
+    {% for c in criticalities %}
+      <option value="{{ c.id }}" {% if filters.criticality_id == c.id|string %}selected{% endif %}>
+        {{ c.code }}
+      </option>
+    {% endfor %}
+  </select>
+
+  <button type="submit">Filter</button>
+</form>
+
+<hr>
+
+<p>
+  Showing
+  {{ (pagination.page - 1) * pagination.page_size + 1 }}
+  –
+  {{ (pagination.page - 1) * pagination.page_size + documents|length }}
+  of {{ pagination.total }} documents
+</p>
+
+<form method="post" action="{{ url_for('pipeline.configure_pipeline') }}">
+
+<table width="100%" cellpadding="6" cellspacing="0" border="1">
+  <tr>
+    <th>Select</th>
+    <th>Title</th>
+    <th>Domain</th>
+    <th>Audience</th>
+    <th>Criticality</th>
+  </tr>
+
+  {% for doc in documents %}
+  <tr>
+    <td><input type="checkbox" name="document_ids" value="{{ doc.id }}"></td>
+    <td>{{ doc.title }}</td>
+    <td>{{ doc.domain.code }}</td>
+    <td>{{ doc.audience.code }}</td>
+    <td>{{ doc.criticality.code }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+<br>
+
+<button type="submit">
+  Configure Pipeline Run
+</button>
+
+</form>
+
+<hr>
+
+<!-- Pagination Controls -->
+<div style="margin-top:16px;">
+
+  {% if pagination.page > 1 %}
+    <a href="{{ url_for(
+        'pipeline.select_documents',
+        title=filters.title,
+        domain_id=filters.domain_id,
+        audience_id=filters.audience_id,
+        criticality_id=filters.criticality_id,
+        page=pagination.page - 1
+    ) }}">
+      ← Previous
+    </a>
+  {% endif %}
+
+  <span style="margin: 0 12px;">
+    Page {{ pagination.page }} of {{ pagination.total_pages }}
+  </span>
+
+  {% if pagination.page < pagination.total_pages %}
+    <a href="{{ url_for(
+        'pipeline.select_documents',
+        title=filters.title,
+        domain_id=filters.domain_id,
+        audience_id=filters.audience_id,
+        criticality_id=filters.criticality_id,
+        page=pagination.page + 1
+    ) }}">
+      Next →
+    </a>
+  {% endif %}
+
+</div>
+
+{% endblock %}

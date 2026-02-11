@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Dataset System{% endblock %}</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+    <script defer src="{{ url_for('static', filename='js/app.js') }}"></script>
+</head>
+<body>
+
+    <header class="app-header">
+        <div class="header-inner">
+            <h2 class="app-title">Dataset System</h2>
+
+            <nav class="app-nav">
+                <a href="{{ url_for('index.index') }}">Home</a>
+
+                <a href="{{ url_for('document_metadata.new_document') }}">
+                    Register Document
+                </a>
+
+                <a href="{{ url_for('documents.list_documents') }}">
+                    View Documents
+                </a>
+
+                <span class="nav-separator">|</span>
+
+                <a href="{{ url_for('pipeline.select_documents') }}">
+                    Run Pipeline
+                </a>
+
+                <a href="{{ url_for('dataset_generator.index') }}">
+                    Generate Dataset
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+
+</body>
+</html>
