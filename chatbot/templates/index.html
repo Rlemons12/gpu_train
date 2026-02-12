@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>EMTAC Model Evaluator</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <h2>EMTAC Model Evaluation Console</h2>
+
+    <!-- ================= CONFIG ================= -->
+    <div class="config-panel">
+        <label>Model:</label>
+        <input id="model_name" value="emtac_mistral_sft" onchange="loadVersions()">
+
+        <label>Version:</label>
+        <select id="version"></select>
+    </div>
+
+    <!-- ================= CHAT ================= -->
+    <div class="chat-panel">
+        <textarea id="prompt" placeholder="Enter prompt here..."></textarea>
+        <button onclick="sendChat()">Generate Response</button>
+    </div>
+
+    <!-- ================= RESPONSE ================= -->
+    <div class="response-panel">
+        <h3>Response</h3>
+        <div id="response_box"></div>
+        <div id="metrics"></div>
+    </div>
+
+    <!-- ================= FEEDBACK ================= -->
+    <div class="feedback-panel">
+        <h3>Rate This Response</h3>
+
+        <div class="rating-buttons">
+            <button onclick="setRating(1)">1</button>
+            <button onclick="setRating(2)">2</button>
+            <button onclick="setRating(3)">3</button>
+            <button onclick="setRating(4)">4</button>
+            <button onclick="setRating(5)">5</button>
+        </div>
+
+        <textarea id="comment" placeholder="Optional comment"></textarea>
+
+        <button onclick="submitFeedback()">Submit Feedback</button>
+        <div id="status"></div>
+    </div>
+
+    <!-- ================= EXPORT MODEL ================= -->
+    <div class="export-panel">
+    <h3>Export Current Model</h3>
+
+    <button onclick="exportModel()">Export Selected Model</button>
+    <div id="export_status"></div>
+</div>
+
+
+</div>
+
+<script>
+
+let lastResponse = "";
+let lastMetrics = {};
+let selectedRating = null;
+
+// ================= LOAD VERSIONS =================
+async function loadVersions() {
+
+    const model_name = document.getElementById("model_name").value;
+    const dropdown = document.getElementById("version");
+    dropdown.innerHTML = "";
+
+    try {
+        const res = await fetch("/versions/" + model_name);
+
+        if (!res.ok) throw new Error("Model not found");
+
+        const data = await res.json();
+
+        if (!data.versions || data.versions.length === 0) {
+            dropdown.innerHTML = "<option>No versions found</option>";
+            return;
+        }
+
+        data.versions.forEach(v => {
+            const option = document.createElement("option");
+            option.value = v;
+            option.text = v;
+            dropdown.appendChild(option);
+        });
+
+        dropdown.value = data.versions[data.versions.length - 1];
+
+    } catch (err) {
+        dropdown.innerHTML = "<option>Error loading versions</option>";
+    }
+}
+
+// ================= CHAT =================
+function setRating(value) {
+    selectedRating = value;
+    document.getElementById("status").innerText = "Selected rating: " + value;
+}
+
+async function sendChat() {
+
+    const model_name = document.getElementById("model_name").value;
+    const version = parseInt(document.getElementById("version").value);
+    const prompt = document.getElementById("prompt").value;
+
+    document.getElementById("status").innerText = "Generating...";
+
+    const res = await fetch("/chat", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({model_name, version, prompt})
+    });
+
+    const data = await res.json();
+
+    lastResponse = data.response;
+    lastMetrics = data;
+
+    document.getElementById("response_box").innerText = data.response;
+    document.getElementById("metrics").innerText =
+        "Latency: " + data.latency + "s | " +
+        "Input Tokens: " + data.input_tokens + " | " +
+        "Output Tokens: " + data.output_tokens;
+
+    document.getElementById("status").innerText = "Response ready.";
+}
+
+// ================= FEEDBACK =================
+async function submitFeedback() {
+
+    if (!selectedRating) {
+        alert("Please select a rating first.");
+        return;
+    }
+
+    const model_name = document.getElementById("model_name").value;
+    const version = parseInt(document.getElementById("version").value);
+    const prompt = document.getElementById("prompt").value;
+    const comment = document.getElementById("comment").value;
+
+    await fetch("/feedback", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            model_name,
+            version,
+            prompt,
+            response: lastResponse,
+            rating: selectedRating,
+            comment,
+            latency: lastMetrics.latency,
+            input_tokens: lastMetrics.input_tokens,
+            output_tokens: lastMetrics.output_tokens
+        })
+    });
+
+    document.getElementById("prompt").value = "";
+    document.getElementById("response_box").innerText = "";
+    document.getElementById("metrics").innerText = "";
+    document.getElementById("comment").value = "";
+    document.getElementById("status").innerText = "Feedback saved.";
+
+    selectedRating = null;
+    lastResponse = "";
+    lastMetrics = {};
+}
+
+// ================= EXPORT =================
+async function exportModel() {
+
+    const model_name = document.getElementById("model_name").value;
+    const version = document.getElementById("version").value;
+
+    if (!model_name || !version) {
+        alert("Select a model and version first.");
+        return;
+    }
+
+    document.getElementById("export_status").innerText = "Exporting...";
+
+    // Build trained model path automatically
+    const trained_model_path = `mlruns/${model_name}/${version}`;
+    const export_name = `${model_name}_v${version}_portable`;
+
+    try {
+        const res = await fetch("/api/export_portable_model", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({
+                base_model_path: "",
+                trained_model_path,
+                model_name: export_name,
+                is_lora: false
+            })
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) throw new Error(data.detail || "Export failed");
+
+        document.getElementById("export_status").innerText =
+            "Exported to: " + data.exported_to;
+
+    } catch (err) {
+        document.getElementById("export_status").innerText =
+            "Error: " + err.message;
+    }
+}
+
+window.onload = loadVersions;
+
+</script>
+
+</body>
+</html>

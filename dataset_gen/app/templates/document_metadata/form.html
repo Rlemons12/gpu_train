@@ -1,0 +1,223 @@
+{% extends "base.html" %}
+{% block title %}Register Document{% endblock %}
+
+{% block content %}
+
+<h2>Register Document</h2>
+
+<form method="post" action="{{ url_for('document_metadata.create_document') }}">
+
+  <!-- Drag & Drop / File Picker -->
+  <div id="drop-zone" class="drop-zone">
+    <p><strong>Drag & drop a file here</strong></p>
+    <p>or</p>
+    <button type="button" id="browse-btn">Browse for file</button>
+    <input type="file" id="file_input" style="display:none;">
+  </div>
+
+  <hr>
+
+<!-- File path (authoritative, absolute path required) -->
+<label for="file_path">
+  File path
+  <small style="font-weight: normal; color: #666;">
+    (absolute path, e.g. <code>/mnt/c/Users/...</code>)
+  </small>
+</label>
+
+<input
+  id="file_path"
+  name="file_path"
+  placeholder="/mnt/c/Users/operator/emtac/data/raw_documention/..."
+  required
+  autocomplete="off"
+  spellcheck="false"
+  pattern="^(/|[A-Za-z]:[\\/]).+"
+/>
+<div style="margin-bottom: 15px;">
+  <a href="{{ url_for('document_metadata.batch_ingest') }}">
+    📁 Batch Folder Ingest
+  </a>
+</div>
+
+<div id="path-warning" style="display:none; color:#c00; font-size:0.9em;">
+  Absolute file path required. Relative filenames are not allowed.
+</div>
+
+
+  <label for="title">Title</label>
+  <input id="title" name="title" required>
+
+  <label for="file_name">File name</label>
+  <input id="file_name" name="file_name" required>
+
+  <label for="domain_id">Domain</label>
+  <select name="domain_id" required>
+    {% for d in domains %}
+      <option value="{{ d.id }}">{{ d.code }}</option>
+    {% endfor %}
+  </select>
+
+  <label for="audience_id">Audience</label>
+  <select name="audience_id" required>
+    {% for a in audiences %}
+      <option value="{{ a.id }}">{{ a.code }}</option>
+    {% endfor %}
+  </select>
+
+  <label for="criticality_id">Criticality</label>
+  <select name="criticality_id" required>
+    {% for c in criticalities %}
+      <option value="{{ c.id }}">{{ c.code }}</option>
+    {% endfor %}
+  </select>
+
+  <label>Tags</label>
+  <div class="tag-box">
+    {% for t in tags %}
+      <label class="tag-item">
+        <input type="checkbox" name="tag_ids" value="{{ t.id }}">
+        {{ t.code }}
+      </label>
+    {% endfor %}
+  </div>
+
+  <button type="submit">Save Document</button>
+
+</form>
+
+<script>
+(function () {
+
+  const dropZone   = document.getElementById("drop-zone");
+  const fileInput  = document.getElementById("file_input");
+  const browseBtn  = document.getElementById("browse-btn");
+
+  const filePathEl = document.getElementById("file_path");
+  const titleEl    = document.getElementById("title");
+  const fileNameEl = document.getElementById("file_name");
+
+  // Optional warning element (recommended)
+  const pathWarning = document.getElementById("path-warning");
+
+  // --------------------------------------------------
+  // Helpers
+  // --------------------------------------------------
+
+  function populateFromFilename(filename) {
+    if (!filename) return;
+
+    const title = filename.replace(/\.[^/.]+$/, "");
+
+    if (!fileNameEl.value) fileNameEl.value = filename;
+    if (!titleEl.value) titleEl.value = title;
+  }
+
+  function normalizeWindowsPath(path) {
+    // C:\Users\... → /mnt/c/Users/...
+    const match = path.match(/^([A-Za-z]):[\\/](.*)/);
+    if (!match) return path;
+    return `/mnt/${match[1].toLowerCase()}/${match[2].replace(/\\/g, "/")}`;
+  }
+
+  function isAbsolutePath(path) {
+    return (
+      path.startsWith("/") ||              // Linux / WSL
+      /^[A-Za-z]:[\\/]/.test(path)          // Windows
+    );
+  }
+
+  function validatePath() {
+    const raw = filePathEl.value.trim();
+    if (!raw || !isAbsolutePath(raw)) {
+      if (pathWarning) pathWarning.style.display = "block";
+      return false;
+    }
+    if (pathWarning) pathWarning.style.display = "none";
+    return true;
+  }
+
+  // --------------------------------------------------
+  // Browse button
+  // --------------------------------------------------
+
+  browseBtn.addEventListener("click", () => fileInput.click());
+
+  fileInput.addEventListener("change", () => {
+    const file = fileInput.files[0];
+    if (!file) return;
+
+    populateFromFilename(file.name);
+
+    // IMPORTANT:
+    // Browsers never give absolute paths.
+    // Do NOT auto-fill file_path with filename.
+    filePathEl.value = "";
+    validatePath();
+  });
+
+  // --------------------------------------------------
+  // Drag & drop
+  // --------------------------------------------------
+
+  dropZone.addEventListener("dragover", e => {
+    e.preventDefault();
+    dropZone.classList.add("dragover");
+  });
+
+  dropZone.addEventListener("dragleave", () => {
+    dropZone.classList.remove("dragover");
+  });
+
+  dropZone.addEventListener("drop", e => {
+    e.preventDefault();
+    dropZone.classList.remove("dragover");
+
+    const file = e.dataTransfer.files[0];
+    if (!file) return;
+
+    populateFromFilename(file.name);
+
+    // Same rule: filename is NOT a valid path
+    filePathEl.value = "";
+    validatePath();
+  });
+
+  // --------------------------------------------------
+  // Manual path entry (authoritative)
+  // --------------------------------------------------
+
+  filePathEl.addEventListener("blur", () => {
+  let raw = filePathEl.value.trim();
+  if (!raw) return;
+
+  // 🔥 Strip wrapping quotes (Windows copy/paste habit)
+  raw = raw.replace(/^["']|["']$/g, "");
+
+  const parts = raw.split(/[/\\]/);
+  const filename = parts[parts.length - 1];
+
+  populateFromFilename(filename);
+  filePathEl.value = normalizeWindowsPath(raw);
+});
+
+
+  // --------------------------------------------------
+  // Hard stop on submit if path invalid
+  // --------------------------------------------------
+
+  const form = filePathEl.closest("form");
+  if (form) {
+    form.addEventListener("submit", e => {
+      if (!validatePath()) {
+        e.preventDefault();
+        alert("Please provide a valid absolute file path (e.g. /mnt/c/Users/...).");
+      }
+    });
+  }
+
+})();
+</script>
+
+
+{% endblock %}
