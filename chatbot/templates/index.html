@@ -93,12 +93,14 @@ async function loadVersions() {
             dropdown.appendChild(option);
         });
 
+        // Default to latest version
         dropdown.value = data.versions[data.versions.length - 1];
 
     } catch (err) {
         dropdown.innerHTML = "<option>Error loading versions</option>";
     }
 }
+
 
 // ================= CHAT =================
 function setRating(value) {
@@ -133,6 +135,7 @@ async function sendChat() {
 
     document.getElementById("status").innerText = "Response ready.";
 }
+
 
 // ================= FEEDBACK =================
 async function submitFeedback() {
@@ -174,38 +177,36 @@ async function submitFeedback() {
     lastMetrics = {};
 }
 
+
 // ================= EXPORT =================
 async function exportModel() {
 
     const model_name = document.getElementById("model_name").value;
-    const version = document.getElementById("version").value;
+    const version = parseInt(document.getElementById("version").value);
 
-    if (!model_name || !version) {
-        alert("Select a model and version first.");
+    if (!model_name || isNaN(version)) {
+        alert("Select a valid model and version first.");
         return;
     }
 
     document.getElementById("export_status").innerText = "Exporting...";
 
-    // Build trained model path automatically
-    const trained_model_path = `mlruns/${model_name}/${version}`;
-    const export_name = `${model_name}_v${version}_portable`;
-
     try {
         const res = await fetch("/api/export_portable_model", {
             method: "POST",
-            headers: {"Content-Type": "application/json"},
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-                base_model_path: "",
-                trained_model_path,
-                model_name: export_name,
+                model_name: model_name,
+                version: version,
                 is_lora: false
             })
         });
 
         const data = await res.json();
 
-        if (!res.ok) throw new Error(data.detail || "Export failed");
+        if (!res.ok) {
+            throw new Error(data.detail || "Export failed");
+        }
 
         document.getElementById("export_status").innerText =
             "Exported to: " + data.exported_to;
@@ -216,9 +217,11 @@ async function exportModel() {
     }
 }
 
+
 window.onload = loadVersions;
 
 </script>
+
 
 </body>
 </html>

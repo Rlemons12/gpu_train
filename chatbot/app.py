@@ -21,7 +21,7 @@ MLRUNS_PATH = PROJECT_ROOT / "mlruns"
 
 MLRUNS_PATH.mkdir(exist_ok=True)
 
-mlflow.set_tracking_uri(f"file://{MLRUNS_PATH}")
+mlflow.set_tracking_uri("http://127.0.0.1:5000")
 
 
 # =====================================================
